@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ulthuf Vending Machine - Risoles dari mesin otomatis</title>
+<meta name="description" content="Ulthuf Vending Machine menjual risoles lewat mesin penjual otomatis. Pilih jumlah, bayar dengan QRIS, risoles keluar otomatis.">
+<style>
+  :root {
+    --teal: #0f4c4c;
+    --teal-deep: #0a3636;
+    --gold: #f0b84a;
+    --gold-soft: #fbe7bd;
+    --mist: #eaf3f1;
+    --ink: #14312f;
+    --muted: #4d6866;
+    --line: #cfe0dc;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.6;
+  }
+  a { color: var(--teal); }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  header.hero { background: var(--teal); color: var(--white); padding: 40px 0 0; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: end; }
+  .brand { font-size: 1rem; font-weight: 600; margin: 0 0 20px; color: var(--gold); }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 5.5vw, 3.4rem);
+    line-height: 1.1;
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+  }
+  .lead { font-size: 1.1rem; max-width: 34ch; margin: 0 0 24px; color: #d6ebe7; }
+  .status {
+    display: inline-block;
+    background: var(--gold-soft);
+    color: var(--teal-deep);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    margin: 0 0 40px;
+    max-width: 46ch;
+  }
+  .machine { width: 100%; max-width: 280px; justify-self: center; display: block; }
+
+  section { padding: 56px 0 8px; }
+  h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.7rem; margin: 0 0 16px; color: var(--teal); }
+  p { margin: 0 0 14px; max-width: 64ch; }
+
+  .menu { list-style: none; padding: 0; margin: 0; border-top: 2px solid var(--teal); max-width: 640px; }
+  .menu li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .menu .name { font-weight: 600; }
+  .menu .note { display: block; font-weight: 400; color: var(--muted); font-size: 0.92rem; }
+  .menu .price { font-family: Georgia, serif; font-size: 1.15rem; white-space: nowrap; color: var(--teal); }
+  .fine { color: var(--muted); font-size: 0.92rem; margin-top: 12px; }
+
+  ol.steps { padding-left: 1.2rem; max-width: 64ch; }
+  ol.steps li { margin-bottom: 10px; padding-left: 4px; }
+  ol.steps li::marker { color: var(--teal); font-weight: 700; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .panel { background: var(--mist); border-left: 4px solid var(--teal); padding: 20px 22px; border-radius: 0 8px 8px 0; }
+  .panel h3 { margin: 0 0 8px; font-size: 1.1rem; color: var(--teal-deep); }
+  .panel p:last-child { margin-bottom: 0; }
+
+  dl.kontak { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; max-width: 640px; }
+  dl.kontak dt { font-weight: 600; }
+  dl.kontak dd { margin: 0; }
+  mark.isi { background: #fff2a8; color: #5a4300; padding: 1px 6px; border-radius: 4px; }
+
+  footer { margin-top: 64px; background: var(--teal-deep); color: #b7d3ce; padding: 28px 0; font-size: 0.92rem; }
+  footer p { margin: 0 0 6px; }
+
+  @media (max-width: 720px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .machine { max-width: 220px; margin-top: -8px; }
+    .two { grid-template-columns: 1fr; }
+    dl.kontak { grid-template-columns: 1fr; gap: 2px; }
+    dl.kontak dd { margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="brand">Ulthuf Vending Machine</p>
+      <h1>Risoles dari mesin otomatis, bayar dengan QRIS.</h1>
+      <p class="lead">Pilih jumlah di layar, pindai kode QRIS, dan risoles keluar otomatis setelah pembayaran berhasil.</p>
+      <p class="status"><strong>Status saat ini:</strong> mesin masih dalam tahap pengembangan dan pengujian. Halaman ini akan diperbarui saat mesin mulai beroperasi.</p>
+    </div>
+
+    <svg class="machine" viewBox="0 0 260 340" role="img" aria-label="Ilustrasi mesin penjual risoles dengan empat rak, layar pemesanan, dan area ambil produk">
+      <rect x="10" y="6" width="240" height="326" rx="10" fill="#f4f8f7" stroke="#0a3636" stroke-width="3"/>
+      <rect x="10" y="6" width="240" height="30" rx="10" fill="#0a3636"/>
+      <text x="130" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#f0b84a">Ulthuf Vending Machine</text>
+      <rect x="22" y="48" width="150" height="214" fill="#dcecf0" stroke="#0f4c4c" stroke-width="2"/>
+      <g fill="#9aa8a6" stroke="#4d6866" stroke-width="1">
+        <rect x="28" y="78" width="138" height="14"/>
+        <rect x="28" y="128" width="138" height="14"/>
+        <rect x="28" y="178" width="138" height="14"/>
+        <rect x="28" y="228" width="138" height="14"/>
+      </g>
+      <g fill="#d99a2b" stroke="#8a5a10" stroke-width="1">
+        <ellipse cx="40" cy="73" rx="9" ry="6"/><ellipse cx="62" cy="73" rx="9" ry="6"/><ellipse cx="84" cy="73" rx="9" ry="6"/><ellipse cx="106" cy="73" rx="9" ry="6"/><ellipse cx="128" cy="73" rx="9" ry="6"/><ellipse cx="150" cy="73" rx="9" ry="6"/>
+        <ellipse cx="40" cy="123" rx="9" ry="6"/><ellipse cx="62" cy="123" rx="9" ry="6"/><ellipse cx="84" cy="123" rx="9" ry="6"/><ellipse cx="106" cy="123" rx="9" ry="6"/><ellipse cx="128" cy="123" rx="9" ry="6"/>
+        <ellipse cx="40" cy="173" rx="9" ry="6"/><ellipse cx="62" cy="173" rx="9" ry="6"/><ellipse cx="84" cy="173" rx="9" ry="6"/><ellipse cx="106" cy="173" rx="9" ry="6"/><ellipse cx="128" cy="173" rx="9" ry="6"/><ellipse cx="150" cy="173" rx="9" ry="6"/>
+        <ellipse cx="40" cy="223" rx="9" ry="6"/><ellipse cx="62" cy="223" rx="9" ry="6"/><ellipse cx="84" cy="223" rx="9" ry="6"/><ellipse cx="106" cy="223" rx="9" ry="6"/>
+      </g>
+      <rect x="184" y="48" width="56" height="100" rx="6" fill="#14312f"/>
+      <rect x="188" y="54" width="48" height="88" fill="#ffffff"/>
+      <rect x="196" y="64" width="32" height="32" fill="#14312f"/>
+      <rect x="200" y="68" width="8" height="8" fill="#ffffff"/><rect x="216" y="68" width="8" height="8" fill="#ffffff"/><rect x="200" y="84" width="8" height="8" fill="#ffffff"/>
+      <rect x="212" y="80" width="6" height="6" fill="#ffffff"/>
+      <text x="212" y="112" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#0f4c4c">Scan QRIS</text>
+      <rect x="196" y="120" width="32" height="12" rx="3" fill="#f0b84a"/>
+      <rect x="184" y="160" width="56" height="102" fill="#fbe7bd" stroke="#8a5a10" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="212" y="214" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#5a4300">Ruang</text>
+      <text x="212" y="225" text-anchor="middle" font-family="system-ui, sans-serif" font-size="8" fill="#5a4300">elektronik</text>
+      <polygon points="22,262 172,262 122,288 72,288" fill="#fbe7bd" stroke="#8a5a10" stroke-width="1.5"/>
+      <rect x="62" y="294" width="120" height="30" rx="5" fill="#cfe0dc" stroke="#0f4c4c" stroke-width="2"/>
+      <text x="122" y="313" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" font-weight="700" fill="#0a3636">Area ambil</text>
+    </svg>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="produk">
+    <h2>Produk dan harga</h2>
+    <p>Kami menjual makanan ringan berupa risoles. Semua pembelian dilakukan lewat mesin.</p>
+    <ul class="menu">
+      <li><span class="name">Risoles mayo</span><span class="price">Rp5.000</span></li>
+      <li><span class="name">Risoles pedas</span><span class="price">Rp5.000</span></li>
+      <li><span class="name">Risoles cokelat</span><span class="price">Rp5.000</span></li>
+      <li><span class="name">Risoles keju</span><span class="price">Rp5.000</span></li>
+      <li><span class="name">Risoles spesial<span class="note">Varian dapat berubah mengikuti stok.</span></span><span class="price">Rp5.000</span></li>
+    </ul>
+    <p class="fine">Harga per buah. Maksimal 5 buah untuk satu kali pembelian. Harga dan varian dapat berubah.</p>
+  </section>
+
+  <section id="cara-beli">
+    <h2>Cara membeli</h2>
+    <ol class="steps">
+      <li>Pilih jumlah risoles di layar mesin.</li>
+      <li>Kode QRIS tampil di layar. Pindai dengan aplikasi mobile banking atau dompet digital apa pun yang mendukung QRIS.</li>
+      <li>Setelah pembayaran berhasil, mesin mengeluarkan risoles secara otomatis.</li>
+      <li>Ambil risoles di area ambil di bagian bawah mesin.</li>
+    </ol>
+  </section>
+
+  <section id="pembayaran">
+    <h2>Pembayaran dan pengembalian dana</h2>
+    <div class="two">
+      <div class="panel">
+        <h3>Pembayaran</h3>
+        <p>Pembayaran hanya melalui QRIS. Setiap pembayaran yang berhasil hanya memicu satu kali pengeluaran sesuai jumlah yang dipesan.</p>
+      </div>
+      <div class="panel">
+        <h3>Jika pesanan tidak lengkap</h3>
+        <p>Jika Anda sudah membayar tetapi risoles tidak keluar seluruhnya, hubungi kami dalam 1x24 jam dengan menyertakan bukti pembayaran. Selisih pembayaran untuk risoles yang tidak keluar akan dikembalikan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <h2>Kontak</h2>
+    <dl class="kontak">
+      <dt>Nama usaha</dt><dd>Ulthuf Vending Machine</dd>
+      <dt>Pemilik</dt><dd>Altaf Fian Juninda</dd>
+      <dt>Jenis usaha</dt><dd>Penjualan makanan (risoles) melalui mesin penjual otomatis</dd>
+      <dt>Email</dt><dd><mark class="isi">[ISI EMAIL KONTAK]</mark></dd>
+      <dt>Lokasi mesin</dt><dd><mark class="isi">[ISI LOKASI MESIN, atau tulis: akan diumumkan]</mark></dd>
+    </dl>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2026 Ulthuf Vending Machine. Semua hak dilindungi.</p>
+    <p>Halaman ini menjelaskan usaha penjualan risoles melalui mesin penjual otomatis.</p>
+  </div>
+</footer>
+
+</body>
+</html>
